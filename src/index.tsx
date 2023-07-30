@@ -2,10 +2,12 @@ import React from "react";
 import {createRoot} from "react-dom/client";
 import App from './components/App'
 
-const element = document.getElementById('root')
+let element = document.getElementById('root') as HTMLElement
+
 const root = createRoot(element)
+
 
 root.render(
     <React.StrictMode>
-        <App/>
+        <App message={'It`s work'}/>
     </React.StrictMode>)
