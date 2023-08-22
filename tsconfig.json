@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "CommonJS",
-    "strictNullChecks": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx"
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "ESNext",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
-  "include": [
-    "src"
-  ]
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }
