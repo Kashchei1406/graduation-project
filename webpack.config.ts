@@ -1,35 +1,23 @@
+import {buildWebpackConfig} from "./config/build/buildWebpackConfig";
+import {BuildEnv, BuildPaths} from "./config/build/types/config";
 import path from "path";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import webpack from "webpack";
 
-const config: webpack.Configuration = {
-    entry: path.resolve(__dirname, 'src','index.tsx'),
 
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: 'bundle.[hash].js',
-        clean: true
-    },
+export default(env: BuildEnv) =>{
+    const paths: BuildPaths ={
+        entry: path.resolve(__dirname, 'src','index.tsx'),
+        build: path.resolve(__dirname, './dist'),
+        html: path.resolve(__dirname, 'public', 'index.html'),
+    }
 
-    module: {
-        rules: [
-            {
-                test: /\.(ts|tsx)$/,
-                exclude: /node_modules/,
-                use: ['ts-loader']
-            }
-        ]
-    },
+    const mode = env.mode || 'development';
+    const PORT = env.port || 3000;
+    const isDev = mode === 'development';
 
-    resolve: {
-        extensions: ['.tsx', '.ts', '.jsx', '.js']
-    },
-
-    plugins: [
-       new HtmlWebpackPlugin({
-           template: path.resolve(__dirname, 'public', 'index.html')
-       })
-    ]
-}
-
-export default config;
+    return buildWebpackConfig({
+        mode,
+        paths: paths,
+        port: PORT,
+        isDev
+    })
+};
